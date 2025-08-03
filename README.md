@@ -22,7 +22,7 @@ This project performs **automatic domain identification** in technical work repo
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 Domain-identification/
 │── README.md
 │── LICENSE
@@ -40,9 +40,6 @@ Domain-identification/
 │ └── project_presentation.pdf
 │── .gitignore
 
-yaml
-Copy
-Edit
 
 ---
 
@@ -60,76 +57,29 @@ Before running the project, you must download and place the models locally.
 ### **1️⃣ Download MPNet Model**
 ```bash
 git clone https://huggingface.co/sentence-transformers/all-mpnet-base-v2
-Place inside:
 
-bash
-Copy
-Edit
+Place inside:
 raw_models/all-mpnet-base-v2/
-2️⃣ Download BGE Reranker Model
-bash
-Copy
-Edit
-git clone https://huggingface.co/BAAI/bge-reranker-large
-Place inside:
 
-bash
-Copy
-Edit
-raw_models/bge-reranker-large/
+2️⃣ Download BGE Reranker Model
+git clone https://huggingface.co/BAAI/bge-reranker-large
+
 3️⃣ Export Models for Triton
 Convert the models to TorchScript or ONNX and place in:
-
-bash
-Copy
-Edit
 model-repository/mpnet_model/1/model.pt
 model-repository/bge_reranker/1/model.pt
+
 ⚙️ Setup & Run
-Install dependencies
-
-bash
-Copy
-Edit
+1.Install dependencies
 pip install -r requirements.txt
-Start Triton Inference Server
 
-bash
-Copy
-Edit
+2.Start Triton Inference Server
 docker run --gpus=all --rm -p8000:8000 -p8001:8001 \
    -v $(pwd)/model-repository:/models nvcr.io/nvidia/tritonserver:23.08-py3 \
    tritonserver --model-repository=/models
-Start FastAPI
 
-bash
-Copy
-Edit
+3.Start FastAPI
 uvicorn main:app --reload --host 0.0.0.0 --port 8080
-🔌 API Endpoints
-1. Embed
-bash
-Copy
-Edit
-POST /embed
-Form:
-
-text or file (JSON batch)
-
-pass_key
-
-top_k (optional)
-
-2. Generate Cache
-bash
-Copy
-Edit
-POST /generate-cache
-Form:
-
-file (CSV)
-
-pass_key
 
 📌 Future Work
 Model versioning for easy upgrades
