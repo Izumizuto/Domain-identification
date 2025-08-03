@@ -205,3 +205,35 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+env/
+ENV/
+
+# OS files
+.DS_Store
+
+# Model files (weights, embeddings)
+*.pt
+raw_models/
+failed_root/
+data/*_embeddings.pt
+
+# Triton model binaries
+model-repository/*/1/model.pt
+
+# Logs
+*.log
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Docker cache
+*.dockerfile.swp
